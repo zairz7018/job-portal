@@ -2,11 +2,12 @@
 // import logo from './logo.svg';
 import './App.css';
 import { MantineProvider } from '@mantine/core';
+import HomePage from './Pages/HomePage';
 
 function App() {
   return (
     <MantineProvider >
-      <h1 className='text-3xl font-bold underline'> heello </h1>
+      <HomePage />
     </MantineProvider>
   );
 }
