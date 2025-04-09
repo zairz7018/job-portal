@@ -1,8 +1,13 @@
-import Header from "../Header/Header"
+  import Header from "../Header/Header"
 
-const HomePage = () => {
+  const HomePage = () => {
 
-  return <Header/>
-}
+    return <div className="min-h-[100vh] bg-mine-shaft-950 font-[Poppins]">
 
-export default HomePage ; 
+      <Header/>
+    </div>
+      
+    
+  }
+
+  export default HomePage ; 

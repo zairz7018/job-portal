@@ -1,31 +1,38 @@
-import { Avatar } from '@mantine/core';
+import { Avatar, Indicator } from '@mantine/core';
 
-import { IconAsset, IconBell, IconSettings } from "@tabler/icons-react";
+import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
+import NavLinks from './NavLinks';
 
 const Header = () => {
   return <div className="w-full bg-black px-6 text-white flex justify-between h-28 items-center">
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-1 items-center text-bright-sun-400" >
 
-      <IconAsset stroke={1.25} className="h-10 w-10"/>
-      <div className="text-3xl font-semibold">Ijobs</div>
+      <IconAnchor stroke={2.5} className="h-8 w-10"/>
+      <div className="text-3xl font-semibold">JobHook</div>
         
       </div>
 
-      <div className="flex gap-3">
-        <a href="##">Find Jobs</a>
-        <a href="##">Find Talent</a>
-        <a href="##">Upload Job</a>
-        <a href="##">About us</a>
-      </div>
+      {NavLinks()} 
       
       <div className="flex gap-5 items-center">
       
-      <IconBell />
+      
         <div className="flex items-center gap-2">
           <div>ZAKARYA</div>
-          <Avatar src="avatar.png" alt="it's me" />
+          
+          <Avatar src="avatar.png"   style={{ width: "35px", height: "35px" }} />
+          
         </div>
-      <IconSettings />
+        <div className="bg-mine-shaft-900 p-1.5 rounded-full">
+        <IconSettings />
+        </div>
+        <div className="bg-mine-shaft-900 p-1.5 rounded-full">
+        <Indicator color="brightSun.4" size={9} processing offset={6}>
+          <IconBell stroke={1.5} />
+        </Indicator>
+        </div>
+        
+      
       </div>
       
       
