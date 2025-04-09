@@ -4,6 +4,7 @@ import './App.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 import HomePage from './Pages/HomePage';
 import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
 import { BrowserRouter, Routes , Route } from 'react-router-dom';
 
 function App() {
