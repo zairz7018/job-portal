@@ -1,4 +1,5 @@
-  import Header from "../Header/Header"
+  import Footer from "../Footer/Footer";
+import Header from "../Header/Header"
 import Companies from "../LandingPage/Companies";
 import DreamJob from "../LandingPage/DreamJob";
 import JobCategory from "../LandingPage/JobCategory";
@@ -17,6 +18,7 @@ import Working from "../LandingPage/Working";
       <Working />
       <Testimonials />
       <Subscribe />
+      <Footer />
     </div>
 
     

@@ -7,7 +7,7 @@ const Header = () => {
   return <div className="w-full bg-black px-6 text-white flex justify-between h-28 items-center">
       <div className="flex gap-1 items-center text-bright-sun-400" >
 
-      <IconAnchor stroke={2.5} className="h-8 w-10"/>
+      <IconAnchor stroke={2.5} className="h-8 w-8"/>
       <div className="text-3xl font-semibold">JobHook</div>
         
       </div>
