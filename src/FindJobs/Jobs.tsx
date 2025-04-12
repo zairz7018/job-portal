@@ -13,7 +13,7 @@ const jobs=()=>{
           jobList.map((job,index) => <JobCard key={index} {...job} />)
         }
       </div>
-      <JobCard />
+      
   </div>
 }
 export default jobs;

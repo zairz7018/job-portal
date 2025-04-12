@@ -1,5 +1,5 @@
-  import Footer from "../Footer/Footer";
-import Header from "../Header/Header"
+//   import Footer from "../Footer/Footer";
+// import Header from "../Header/Header"
 import Companies from "../LandingPage/Companies";
 import DreamJob from "../LandingPage/DreamJob";
 import JobCategory from "../LandingPage/JobCategory";
@@ -11,14 +11,14 @@ import Working from "../LandingPage/Working";
 
     return <div className="min-h-[100vh] bg-mine-shaft-950 font-[Poppins]">
 
-      <Header/>
+      {/* <Header/> */}
       <DreamJob/>
       <Companies />
       <JobCategory />
       <Working />
       <Testimonials />
       <Subscribe />
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
     
