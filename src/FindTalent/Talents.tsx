@@ -1,4 +1,4 @@
-import { jobList } from "../Data/JobsData";
+// import { jobList } from "../Data/JobsData";
 import { talents } from "../Data/TalentData";
 import Sort from "../FindJobs/Sort";
 import TalentCard from "./TalentCard";

@@ -21,7 +21,7 @@ const TalentCard=(props:any)=>{
       </div>
       <div className="flex gap-2">
         {
-          props.topSkills?.map((skill:any , index:any) =><div key={index} className=" py-1 py-2 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs"> {skill}</div>)
+          props.topSkills?.map((skill:any , index:any) =><div key={index} className="  py-2 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs"> {skill}</div>)
         }
         
       </div>
