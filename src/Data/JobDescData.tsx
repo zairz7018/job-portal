@@ -3,7 +3,7 @@ import { IconBriefcase, IconMapPin, IconPremiumRights, IconRecharging } from "@t
 const card=[
     {name:"Location", icon:IconMapPin, value:"New York"},
     {name:"Experience", icon:IconBriefcase, value:"Expert"},
-    {name:"Salary", icon:IconPremiumRights, value:"48 LPA"},
+    {name:"Salary", icon:IconPremiumRights, value:"48 Euro"},
     {name:"Job Type", icon:IconRecharging, value:"Full Time"},
 ]
 const skills=['React', 'Spring Boot', 'Java', 'Python', 'Node.js', 'MongoDB', 'Express', 'Django', 'PostgreSQL']
