@@ -2,6 +2,7 @@ import { Button } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import JobDesc from "../JobDesc/JobDesc";
+import RecommendedJobs from "../JobDesc/RecommendedJobs";
 
 
 const JobDescPage = () => {
@@ -10,8 +11,9 @@ const JobDescPage = () => {
         <Link to="/find-jobs" className="my-4 inline-block">
                   <Button leftSection={<IconArrowLeft size={20} />} color="brightSun.4" variant="light" >Back</Button>
                 </Link>
-        <div className="flex gap-5">
+        <div className="flex gap-5 justify-around">
               <JobDesc />
+              <RecommendedJobs />
         </div>
     </div>
   )
