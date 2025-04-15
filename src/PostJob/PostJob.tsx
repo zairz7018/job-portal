@@ -2,7 +2,7 @@ import { Button, TagsInput } from "@mantine/core";
 import { fields } from "../Data/PostJob";
 import SelectInput from "./SelectInput";
 import TextEditor from "./TextEditor";
-import { IconArrowLeft } from "@tabler/icons-react";
+
 
 const PostJob = () => {
   const select = fields;

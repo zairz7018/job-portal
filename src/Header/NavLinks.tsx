@@ -6,7 +6,7 @@
       { name: "Find Jobs", url: "find-jobs" },
       { name: "Find Talent", url: "find-talent" },
       { name: "Post Job", url: "post-job" },
-      { name: "About us", url: "about" },
+      { name: "Posted Job", url: "posted-job" },
     ]
       const location = useLocation();
     return <div className="flex gap-5 text-mine-shaft-300 h-full items-center">
