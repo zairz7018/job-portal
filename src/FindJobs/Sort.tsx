@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Combobox, useCombobox, } from '@mantine/core';
+import { ActionIcon, Combobox, useCombobox, } from '@mantine/core';
 import { IconAdjustments } from '@tabler/icons-react';
 
 const opt = ['Relevance', 'Most Recent', 'Salary (Low to high)', 'Salary (high to low)'];
@@ -30,7 +30,9 @@ const Sort=()=> {
       >
         <Combobox.Target>
           <div onClick={()=>combobox.toggleDropdown()} className='border cursor-pointer border-bright-sun-400 flex px-2 gap-2 py-1 text-sm rounded-xl items-center'>
-            {selectedItem} <IconAdjustments  className='h-5 w-5 text-bright-sun-400'/>
+            <ActionIcon color='brightSun.4' variant='transparent'  aria-label='Settings'>
+            {selectedItem} <IconAdjustments  className='h-5 w-5 text-bright-sun-400'/> 
+            </ActionIcon>
           </div>
         </Combobox.Target>
 
