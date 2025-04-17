@@ -2,9 +2,11 @@ import { Avatar, Indicator } from '@mantine/core';
 
 import { IconAnchor, IconBell, IconSettings } from "@tabler/icons-react";
 import NavLinks from './NavLinks';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
-  return <div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
+  const location = useLocation();
+  return location.pathname!="/signup" ?<div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
       <div className="flex gap-1 items-center text-bright-sun-400" >
 
       <IconAnchor stroke={2.5} className="h-8 w-8"/>
@@ -36,7 +38,7 @@ const Header = () => {
       </div>
       
       
-    </div>
+    </div>: <></>
   
 }
 export default Header;
