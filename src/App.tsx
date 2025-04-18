@@ -54,6 +54,7 @@ function App() {
         <Route path='/apply-job' element={<ApplyJobPage />} />
         <Route path='/talent-profile' element={<TalentProfilePage />} />
         <Route path='/signup' element={<SignUpPage />} />
+        <Route path='/login' element={<SignUpPage />} />
         <Route path='/' element={<HomePage />} />
       </Routes>
       <Footer />

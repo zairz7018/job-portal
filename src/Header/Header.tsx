@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const location = useLocation();
-  return location.pathname!="/signup" ?<div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
+  return location.pathname!="/signup" && location.pathname!="/login" ?<div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
       <div className="flex gap-1 items-center text-bright-sun-400" >
 
       <IconAnchor stroke={2.5} className="h-8 w-8"/>
