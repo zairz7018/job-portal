@@ -1,20 +1,22 @@
-import { Button, Divider } from "@mantine/core";
-import { IconBriefcase, IconMapPin } from "@tabler/icons-react";
+import { ActionIcon, Button, Divider } from "@mantine/core";
+import { IconAdjustments, IconBriefcase, IconMapPin } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
 import CertiCard from "./CertiCard";
 import { profile } from "../Data/TalentData";
 
 
 const Profile = (props:any) =>{
-  return <div className="w-2/3">
+  return <div className="w-4/5 mx-auto">
       <div className="relative">
           <img className="rounded-t-2xl" src="/profile/banner.jpg" alt="" />
           <img className="w-48 h-48 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src="/avatar.png" alt="" />
           </div>
       
           <div className="px-3 mt-16">
-              <div className="text-3xl font-semibold flex justify-between"> {props.name}
-                <Button color="brightSun.4" variant="light" >Message </Button>
+              <div className="text-3xl font-semibold flex justify-between"> Zakarya zair
+                <ActionIcon variant="subtle" aria-label="Settings">
+                  <IconAdjustments style={{width:'70%' , height : '70%'}} stroke={1.5} />
+                </ActionIcon>
               </div>
               <div className="text-xl flex gap-1 items-center"> <IconBriefcase className="h-5 w-5" stroke={1.5}  />{props.role} &bull; {props.company}</div>
               <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
