@@ -1,8 +1,8 @@
-import { Button, Divider } from "@mantine/core";
+import {  Button, Divider } from "@mantine/core";
 import { IconBriefcase, IconMapPin } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
 import CertiCard from "./CertiCard";
-import { profile } from "../Data/TalentData";
+// import { profile } from "../Data/TalentData";
 
 
 const Profile = (props:any) =>{
