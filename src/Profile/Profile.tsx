@@ -1,5 +1,5 @@
-import { ActionIcon, Button, Divider, TagsInput, Textarea } from "@mantine/core";
-import { IconAdjustments, IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
+import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
+import {  IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
 import CertiCard from "./CertiCard";
 import { profile } from "../Data/TalentData";

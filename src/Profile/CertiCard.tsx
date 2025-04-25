@@ -1,5 +1,5 @@
 import { ActionIcon } from "@mantine/core";
-import { IconPencil, IconTrash } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 
 const CertiCard = (props:any) => {
   return <div className="flex justify-between">
