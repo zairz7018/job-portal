@@ -1,10 +1,12 @@
 import { Anchor, Button, Checkbox, PasswordInput, rem, TextInput } from "@mantine/core";
 import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { LoginUser } from "../Services/UserService";
 import { LoginValidation } from "../Services/FormValidation";
 import { notifications } from "@mantine/notifications";
+import { useDisclosure } from "@mantine/hooks";
+import ResetPassword from "./ResetPassword";
 const form={
   email:"",
   password:""
@@ -13,6 +15,7 @@ const form={
 const Login = () => {
   const [data, setData] = useState<{[key:string]:string}>(form);
   const [formError, setFormError] = useState<{[key:string]:string}>(form);
+  const [opened,{open,close}] = useDisclosure(false);
   const navigate=useNavigate();
 
 
@@ -29,7 +32,6 @@ const Login = () => {
     setFormError(newFormError);
     if(valid){
       LoginUser(data).then((res)=>{
-        console.log(res);
         notifications.show({
                   title: "Login Successfully",
                   message: "Redirecting to homePage page...",
@@ -38,7 +40,7 @@ const Login = () => {
                   color: "teal",
                   withBorder: true,
                   className: "!border-green-500"
-                });
+                })
                 setTimeout(() => {
                   navigate("/");
                 }, 4000);
@@ -60,17 +62,24 @@ const Login = () => {
     }
 
 
-  return <div className="w-1/2 px-20 flex flex-col justify-center  gap-3">
+  return <><div className="w-1/2 px-20 flex flex-col justify-center  gap-3">
   <div className="text-2xl font-semibold "> Create Account</div>
   
   <TextInput error={formError.email} value={data.email} name="email" onChange={handleChange} withAsterisk leftSection={<IconAt style={{width: rem(18) , height: rem(16)}} />} label="Email " placeholder="Your email" />
   <PasswordInput error={formError.password} value={data.password} name="password" onChange={handleChange} withAsterisk leftSection={<IconLock style={{width: rem(18) , height: rem(18)}} stroke={1.5} />} label="Password"  placeholder="Password" />
   
   <Checkbox autoContrast label={<>I accept{' '}<Anchor>tesms & conditions</Anchor> </>} />
-  <Button onClick={handleSubmit} autoContrast variant="filled">Sign Up</Button>
+  <Button onClick={handleSubmit} autoContrast variant="filled">Login</Button>
   <div className="mx-auto">Don't Have a Account ? <span onClick={()=>{navigate("/signup"); setData(form);setFormError(data)}} className="cursor-pointer text-bright-sun-400 hover:underline" >SignUp</span></div>
+  <div onClick={open} className="text-bright-sun-400 hover:underline cursor-pointer text-center">Forget Password ?</div>
 
   
+
+ 
 </div>
+ 
+  <ResetPassword  opened={opened} close={close}/>
+</>
+  
 }
 export default Login;

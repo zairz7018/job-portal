@@ -22,6 +22,7 @@ import JobHistoryPage from './Pages/JobHistoryPage';
 import SignUpPage from './Pages/SignUpPage';
 import ProfilePage from './Pages/ProfilePage';
 import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
 
 
 function App() {

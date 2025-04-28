@@ -1,7 +1,7 @@
 import { Anchor, Button, Checkbox, Group, PasswordInput, Radio, rem, TextInput } from "@mantine/core";
 import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RegisterUser } from "../Services/UserService";
 import { notifications } from "@mantine/notifications";
 import { SignUpValidation } from "../Services/FormValidation";
