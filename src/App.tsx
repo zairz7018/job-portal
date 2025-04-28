@@ -7,7 +7,7 @@ import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
-import { BrowserRouter, Routes , Route } from 'react-router-dom';
+import { BrowserRouter, Routes , Route, Navigate } from 'react-router-dom';
 import FindJobs from './Pages/FindJobs';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
@@ -23,6 +23,10 @@ import SignUpPage from './Pages/SignUpPage';
 import ProfilePage from './Pages/ProfilePage';
 import { Notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
+import { Provider } from 'react-redux';
+import Store from './Store';
+import { GetItem } from './Services/LocalStorageService';
+import AppRoutes from './Pages/AppRoutes';
 
 
 function App() {
@@ -40,35 +44,17 @@ function App() {
     primaryShade: 4
   });
     
+
   return (
     
+    <Provider store={Store}>
     <MantineProvider defaultColorScheme='dark' theme={theme}>
       <Notifications position='top-center' zIndex={1000}/>
-      <BrowserRouter>
-      
-      <div className='relative'>
-      <Header/>
-      <Divider size="xs"  mx="md" />
-      <Routes>
-        <Route path='/find-jobs' element={<FindJobs />} />
-        <Route path='/find-talent' element={<FindTalentPage />} />
-        <Route path='/company' element={<CompanyPage />} />
-        <Route path='/posted-job' element={<PostedJobPage />} />
-        <Route path='/post-job' element={<PostJobPage />} />
-        <Route path='/job-history' element={<JobHistoryPage />} />
-        <Route path='/Jobs' element={<JobDescPage />} />
-        <Route path='/apply-job' element={<ApplyJobPage />} />
-        <Route path='/talent-profile' element={<TalentProfilePage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/login' element={<SignUpPage />} />
-        <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/' element={<HomePage />} />
-      </Routes>
-      <Footer />
-      </div>
-      </BrowserRouter>
+
+      <AppRoutes />
       
     </MantineProvider>
+    </Provider>
   );
 }
 
