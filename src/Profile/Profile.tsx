@@ -1,17 +1,22 @@
-import { ActionIcon, Divider, TagsInput, Textarea } from "@mantine/core";
+import { ActionIcon, Avatar, Divider, FileInput, Indicator, TagsInput, Textarea } from "@mantine/core";
 import {  IconBriefcase, IconDeviceFloppy, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
 import ExpCard from "./ExpCard";
 import CertiCard from "./CertiCard";
-import { profile } from "../Data/TalentData";
-import { useState } from "react";
-import SelectInput from "./SelectInput";
-import fields from "../Data/Profile";
+
+import { useEffect, useState } from "react";
+
 import ExpInput from "./ExpInput";
 import CertiInput from "./CertiInput";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../Services/ProfileService";
+import Info from "./Info";
+import { setProfile } from "../Slices/ProfileSlice";
 
 
 const Profile = () =>{
-  const select = fields;
+  const dispatch=useDispatch();
+  const user = useSelector((state:any)=>state.user);
+  const profile = useSelector((state:any)=>state.profile); 
   const [addExp, setAddExp] = useState(false);
   const [addCerti, setAddCerti] = useState(false);
   const [skills , setSkills] = useState(["JavaScript", "React", "Node.js", "Express", "MongoDB", "HTML", "CSS", "Tailwind CSS", "Python", "Django"]);
@@ -22,31 +27,32 @@ const Profile = () =>{
     newEdit[index] = !newEdit[index];
     setEdit(newEdit);
   }
+  useEffect(()=>{
+    getProfile(user.id).then((data:any)=>{
+      dispatch(setProfile(data));
+    }).catch((error:any)=>{
+      console.log(error);
+    });
+  }, [])
   return <div className="w-4/5 mx-auto">
-    <div className=""></div>
-      <div className="relative">
-          <img className="rounded-t-2xl" src="/profile/banner.jpg" alt="" />
-          <img className="w-48 h-48 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8" src="/avatar.png" alt="" />
-          </div>
-      
+    <div className="">
+        <div className="relative">
+        <img className="rounded-t-2xl" src="/profile/banner.jpg" alt="" />
+        <div className="absolute -bottom-1/3 left-3">
+          <Indicator className="[&_.mantine-Indicator-Indicator]:!border-4 [&_img]:hover:opacity-80" autoContrast 
+          inline offset={30} label={<IconPencil className="w-4/5 h-4/5" />} size={45} position="bottom-end" color="brightSun.4" withBorder>
+            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src="/avatar.png" alt="" />
+
+            <FileInput className="absolute bottom-2 right-2 z-[201] w-12 [&_div]:text-transparent"
+            variant="unstyled" size="lg" radius='xl' accept="image/png,image/jpeg" /> 
+          </Indicator>
+        </div>
+        </div>
+    
           <div className="px-3 mt-16">
-              <div className="text-3xl font-semibold flex justify-between"> Zakarya zair
-                <ActionIcon variant="subtle" color="brightSun.4" onClick={()=>handleEdit(0)} size='lg' >
-    {edit[0]?<IconDeviceFloppy className="h-4 w-4"/>:<IconPencil className="h-4/5 w-4/5"  />}              
-                </ActionIcon>
-              </div>
-              {
-                edit[0]?<><div className="flex gap-10 [&>*]:w-1/2">
-                <SelectInput {...select[0]}/>
-                <SelectInput {...select[1]}/>
-                      </div>
-                <SelectInput {...select[2]}/></>:<><div className="text-xl flex gap-1 items-center"> <IconBriefcase className="h-5 w-5" stroke={1.5}  />role &bull; Company</div>
-              <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
-                <IconMapPin className="h-5 w-5" stroke={1.5} />Location
-              </div></>
-              }
-              
-              <Divider mx='xs' my='xl' />
+              <Info />
+        </div>      
+              <Divider  my='xl' />
 
 
               <div>
@@ -56,7 +62,7 @@ const Profile = () =>{
                 {
                   edit[1]?<Textarea value={about} placeholder="Enter About Yourself ..." autosize minRows={3} onChange={(event)=> setAbout(event.target.value)}/> :
                   <div className="text-sm text-mine-shaft-300 text-justify">
-                    {about}
+                    {profile?.about}
                   </div>
                 }
                 
@@ -71,7 +77,7 @@ const Profile = () =>{
                   edit[2]?<TagsInput value={skills} onChange={setSkills} placeholder="Add skills" splitChars={[',',' ' , '|']} 
                   />:<div className=" flex flex-wrap gap-2">
                   {
-                    skills.map((skill:any , index:any) =><div key={index} className="bg-bright-sun-300 text-sm font-medium bg-opacity-15 rounded-xl text-bright-sun-800 px-3 py-1 ">{skill} </div> )
+                    profile?.skills?.map((skill:any , index:number) =><div key={index} className="bg-bright-sun-300 text-sm font-medium bg-opacity-15 rounded-xl text-bright-sun-800 px-3 py-1 ">{skill} </div> )
                   }
                   
                 </div>
@@ -88,7 +94,7 @@ const Profile = () =>{
                 </ActionIcon></div></div>
             <div className="flex flex-col gap-8">
                 {
-                  profile.experience.map((exp,index)=> <ExpCard key={index} {...exp} edit={edit[3]} />)
+                  profile?.experiences?.map((exp:any,index:number)=> <ExpCard key={index} {...exp} edit={edit[3]} />)
                 }
                 {addExp && <ExpInput add setEdit={setAddExp} />}
             </div>
@@ -102,7 +108,7 @@ const Profile = () =>{
                 </ActionIcon></div> </div>
                 <div className="flex flex-col gap-8">
                     {
-                      profile.certifications.map((certi:any , index:any) =><CertiCard key={index} edit={edit[4]} {...certi} />)
+                      profile?.certifications?.map((certi:any , index:number) =><CertiCard key={index} edit={edit[4]} {...certi} />)
                     }
                     {
                      addCerti&& <CertiInput setEdit={setAddCerti} />
