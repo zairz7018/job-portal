@@ -1,31 +1,16 @@
 // import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import { createTheme, Divider, MantineProvider } from '@mantine/core';
-import HomePage from './Pages/HomePage';
+import { createTheme,  MantineProvider } from '@mantine/core';
+
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
-import { BrowserRouter, Routes , Route, Navigate } from 'react-router-dom';
-import FindJobs from './Pages/FindJobs';
-import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import FindTalentPage from './Pages/FindTalentPage';
-import TalentProfilePage from './Pages/TalentProfilePage';
-import PostJobPage from './Pages/PostJobPage';
-import JobDescPage from './Pages/JobDescPage';
-import ApplyJobPage from './Pages/ApplyJobPage';
-import CompanyPage from './Pages/CompanyPage';
-import PostedJobPage from './Pages/PostedJobPage';
-import JobHistoryPage from './Pages/JobHistoryPage';
-import SignUpPage from './Pages/SignUpPage';
-import ProfilePage from './Pages/ProfilePage';
 import { Notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
 import { Provider } from 'react-redux';
 import Store from './Store';
-import { GetItem } from './Services/LocalStorageService';
 import AppRoutes from './Pages/AppRoutes';
 
 
