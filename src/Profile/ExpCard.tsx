@@ -9,16 +9,16 @@ import { changeProfile } from "../Slices/ProfileSlice";
 import { SuccessNotification } from "../Services/NotificationService";
 
 const ExpCard = (props:any) => {
-  const dispatch = useDispatch();
-  const profile = useSelector((state:any) => state.profile);
-  const [edit , setEdit] = useState(false);
-  const handleDelete =() =>{
-    let exp = [...profile.experiences];
-    exp.splice(props.index , 1);
-    let updateProfile = {...profile, experiences:exp}; 
-    dispatch(changeProfile(updateProfile));
-    SuccessNotification("Success" , "Experience Deleted Successfully ")
-  }
+    const dispatch = useDispatch();
+    const profile = useSelector((state:any) => state.profile);
+    const [edit , setEdit] = useState(false);
+    const handleDelete =() =>{
+      let exp = [...profile.experiences];
+      exp.splice(props.index , 1);
+      let updateProfile = {...profile, experiences:exp}; 
+      dispatch(changeProfile(updateProfile));
+      SuccessNotification("Success" , "Experience Deleted Successfully ")
+    }
   
   return !edit?<div className="flex flex-col gap-2">
       <div className="flex justify-between">

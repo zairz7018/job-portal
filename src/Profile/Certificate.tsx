@@ -42,7 +42,7 @@ const Certficate = () => {
 
   <div className="flex flex-col gap-8">
     {profile?.certifications?.map((certi: any, index: number) => (
-      <CertiCard key={index} edit={edit} {...certi} />
+      <CertiCard key={index} edit={edit} index={index} {...certi} />
     ))}
 
     {addCerti && <CertiInput setEdit={setAddCerti} />}
