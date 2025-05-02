@@ -1,50 +1,66 @@
-import {  Avatar, Divider, FileInput, Indicator } from "@mantine/core";
-import {IconPencil } from "@tabler/icons-react";
+import { ActionIcon, Avatar, Divider, FileInput, Indicator, Overlay, TagsInput, Textarea } from "@mantine/core";
+import {  IconBriefcase, IconDeviceFloppy, IconEdit, IconMapPin, IconPencil, IconPlus } from "@tabler/icons-react";
+
 
 import { useEffect, useState } from "react";
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../Services/ProfileService";
+import { getProfile, updateProfile } from "../Services/ProfileService";
 import Info from "./Info";
-import { setProfile } from "../Slices/ProfileSlice";
+import { changeProfile, setProfile } from "../Slices/ProfileSlice";
 import About from "./About";
 import Skills from "./Skills";
 import Experience from "./Experience";
 import Certficate from "./Certificate";
+import { useHover } from "@mantine/hooks";
+import { SuccessNotification } from "../Services/NotificationService";
 
 
 
 
-const Profile = () =>{
-  const dispatch=useDispatch();
-  const user = useSelector((state:any)=>state.user);
-  const profile = useSelector((state:any)=>state.profile); 
-  const [edit, setEdit] = useState([false, false, false, false, false]);
-  const handleEdit=(index:any)=>{
-    const newEdit = [...edit];
-    newEdit[index] = !newEdit[index];
-    setEdit(newEdit);
-  }
-  useEffect(()=>{
-    getProfile(user.id).then((data:any)=>{
-      dispatch(setProfile(data));
-    }).catch((error:any)=>{
-      console.log(error);
-    });
-  }, [])
+  const Profile = () =>{
+    const dispatch=useDispatch();
+    const user = useSelector((state:any)=>state.user);
+    const profile = useSelector((state:any)=>state.profile); 
+    
+      
+    const {hovered , ref} =useHover();
+    const handleFileChange =async (image:any) =>{
+      let picture:any = await getBase64(image);
+      let updatedProfile = {...profile , picture:picture.split(',')[1]};
+      dispatch(changeProfile(updatedProfile));
+      SuccessNotification("Success" , "Profile picture changed Successfully ");
+    }
+    const getBase64=(file:any) =>{
+      return new Promise((resolve , reject) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror=error=>reject(error);
+      })
+    }
   return <div className="w-4/5 mx-auto">
     <div className="">
-        <div className="relative">
+    <div className="relative">
         <img className="rounded-t-2xl" src="/profile/banner.jpg" alt="" />
-        <div className="absolute -bottom-1/3 left-3">
-          <Indicator className="[&_.mantine-Indicator-Indicator]:!border-4 [&_img]:hover:opacity-80" autoContrast 
-          inline offset={30} label={<IconPencil className="w-4/5 h-4/5" />} size={45} position="bottom-end" color="brightSun.4" withBorder>
-            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" src="/avatar.png" alt="" />
+        <div ref={ref} className="absolute flex items-center justify-center -bottom-1/3 left-3">
+          
+            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" 
+            src={profile.picture?
+              `data:image/jpeg;base64,${profile.picture}`:
+              "/avatar.png" }
+             alt="" />
 
-            <FileInput className="absolute bottom-2 right-2 z-[201] w-12 [&_div]:text-transparent"
-            variant="unstyled" size="lg" radius='xl' accept="image/png,image/jpeg" /> 
-          </Indicator>
+
+            {hovered && <Overlay color="" backgroundOpacity={0.75} className="!rounded-full" />}
+            {hovered && <IconEdit className="absolute z-[300] !w-16 !h-16" />}
+            
+            {hovered && <FileInput className="absolute w-full z-[301] !h-full
+            [&_*]:!h-full [&_*]:!rounded-full
+            " 
+            variant="transparent" onChange={handleFileChange}
+              accept="image/png,image/jpeg" /> }
         </div>
         </div>
     

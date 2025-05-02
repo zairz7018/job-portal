@@ -3,7 +3,6 @@ import { IconTrash } from "@tabler/icons-react";
 import { formatDate } from "../Services/Utilities";
 import { changeProfile } from "../Slices/ProfileSlice";
 import { SuccessNotification } from "../Services/NotificationService";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CertiCard = (props:any) => {

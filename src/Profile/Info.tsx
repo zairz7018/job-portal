@@ -33,7 +33,7 @@ const Info=()=>{
       SuccessNotification("Success" , "Profile updated Successfuly !")
   }
   return <>
-  <div className="text-3xl font-semibold flex justify-between"> {user.name} <div>
+  <div className="text-3xl font-semibold flex justify-between"> <div className="mt-2">{user.name}</div> <div>
     {edit&& <ActionIcon variant="subtle" color="green.8" onClick={handleSave} size='lg' >
     {<IconCheck className="h-4/5 w-4/5"/>}              
                 </ActionIcon> }
