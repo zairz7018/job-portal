@@ -7,14 +7,13 @@ import Superscript from '@tiptap/extension-superscript';
 import Subscript from '@tiptap/extension-subscript';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
-import { content } from '../Data/PostJob';
 
 
 
 
   
 
-  const TextEditor = () => {
+  const TextEditor = (props:any) => {
     const editor = useEditor({
       
       extensions: [
@@ -26,7 +25,10 @@ import { content } from '../Data/PostJob';
         Highlight,
         TextAlign.configure({ types: ['heading', 'paragraph'] }),
       ],
-      content,
+      content:props.form.getValues().description,
+      onUpdate({editor}){
+        props.form.setFieldValue('description' , editor.getHTML());
+      }
     });
 
   return (
