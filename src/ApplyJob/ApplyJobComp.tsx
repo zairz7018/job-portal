@@ -12,7 +12,7 @@ const ApplyJobComp = (props:any) => {
     <div className="flex justify-between">
         <div className="flex gap-2 items-center ">
           <div className="p-3 bg-mine-shaft-800 rounded-xl ">
-            <img className="h-14" src={`/Icons/Google.png`} alt="" />
+            <img className="h-14" src={`/Icons/${props.company}.png`} alt="" />
           </div>
           <div>
             <div className="font-semibold text-2xl">{props.jobTitle}</div>

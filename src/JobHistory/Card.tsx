@@ -1,9 +1,25 @@
 import { Button, Divider, Text } from "@mantine/core";
 import { IconBookmark, IconBookmarkFilled, IconCalendarMonth, IconClockHour3 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
+import { timeAgo } from "../Services/Utilities";
+import { profile } from "console";
+import { changeProfile } from "../Slices/ProfileSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Card = (props:any)=> {
-  return <Link to="/Jobs" className="bg-mine-shaft-900 p-4 w-72 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
+  const profile = useSelector((state: any) => state.profile);
+  const dispatch = useDispatch();
+  const handleSaveJob =() =>{
+      let savedJobs:any[] = [...profile.savedJobs ];
+      if(savedJobs.includes(props.id)){
+        savedJobs = savedJobs?.filter((id:any)=>id!==props.id);
+      }else{
+        savedJobs=[...savedJobs, props.id];
+      }
+      let updatedProfile = {...profile, savedJobs:savedJobs};
+      dispatch(changeProfile(updatedProfile));
+    }
+  return <div className="bg-mine-shaft-900 p-4 w-72 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center ">
           <div className="p-2 bg-mine-shaft-800 rounded-md ">
@@ -11,26 +27,29 @@ const Card = (props:any)=> {
           </div>
           <div>
             <div className="font-semibold">{props.jobTitle}</div>
-            <div className="text-xs text-mine-shaft-300">{props.company} &#x2022; {props.applicants} Applications</div>
+            <div className="text-xs text-mine-shaft-300">{props.company} &#x2022; 
+              {props.applicants ? props.applicants.length:0} Applications</div>
           </div>
         </div>
-        {props.Saved?<IconBookmarkFilled className="text-bright-sun-400 stroke={1.5} cursor-pointer" />
-         :<IconBookmark className="text-mine-shaft-300 cursor-pointer" />}
+        {profile.savedJobs ?.includes(props.id) ?<IconBookmarkFilled onClick={handleSaveJob} className=" text-bright-sun-400 cursor-pointer" />
+
+        :<IconBookmark onClick={handleSaveJob}  className="text-mine-shaft-300 hover:text-bright-sun-400 cursor-pointer" />
+        }
       </div>
       <div className="flex gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:bg-mine-shaft-800 [&>div]:text-bright-sun-400 [&>div]:rounded-lg text-xs">
         <div>{props.experience}</div>
         <div>{props.jobType}</div>
         <div>{props.location}</div>
       </div>
-      <Text className="!text-xs text-justify !text-mine-shaft-300" lineClamp={3} > {props.description}
+      <Text className="!text-xs text-justify !text-mine-shaft-300" lineClamp={3} > {props.about}
       </Text>
       <Divider size="xs" color="mineShaft.7" />
       <div className="flex justify-between">
         <div className="font-semibold text-mine-shaft-200">
-          &euro; {props.package}
+          &euro; {props.packageOffered} Euro
         </div>
         <div className="flex gap-1 text-xs text-mine-shaft-400 items-center">
-          <IconClockHour3 className="h-5  w-5" stroke={1.5} /> {props.Applied|| props.interviewing?"Applied":props.Offered?"Interviewed":"Posted"} {props.postedDaysAgo} Days Ago
+          <IconClockHour3 className="h-5  w-5" stroke={1.5} /> {props.Applied|| props.interviewing?"Applied":props.Offered?"Interviewed":"Posted"} {timeAgo(props.postTime)} 
         </div>
       </div>
       {(props.Offered  || props.interviewing ) &&<Divider size="xs" color="brightSun.4" />}
@@ -45,6 +64,9 @@ const Card = (props:any)=> {
         <IconCalendarMonth className="text-bright-sun-400 w-5 h-5" stroke={1.5} /> Sun , 25 August &bull; <span className="text-mine-shaft-400">10:00 AM</span>
       </div>
       }
-    </Link>
+      <Link to={`/Jobs/${props.id}`} >
+              <Button fullWidth color="brightSun.4" variant="outline" >View Job</Button>
+          </Link>
+    </div>
 }
 export default Card;

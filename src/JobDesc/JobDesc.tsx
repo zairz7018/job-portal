@@ -1,12 +1,34 @@
 import { ActionIcon, Button, Divider } from "@mantine/core";
-import { IconBookmark} from "@tabler/icons-react";
+import { IconBookmark, IconBookmarkFilled} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { card } from "../Data/JobDescData";
 //@ts-ignore
 import DOMPurify from 'dompurify';
 import { timeAgo } from "../Services/Utilities";
+import { useDispatch, useSelector } from "react-redux";
+import { changeProfile } from "../Slices/ProfileSlice";
+import { useEffect, useState } from "react";
 
 const JobDesc = (props:any) => {
+  const profile = useSelector((state:any) => state.profile);
+  const dispatch = useDispatch();
+  const [applied , setApplied] = useState(false);
+  const user=useSelector((state:any) => state.user);
+  const handleSaveJob =() =>{
+      let savedJobs:any[] = [...profile.savedJobs ];
+      if(savedJobs.includes(props.id)){
+        savedJobs = savedJobs?.filter((id:any)=>id!==props.id);
+      }else{
+        savedJobs=[...savedJobs, props.id];
+      }
+      let updatedProfile = {...profile, savedJobs:savedJobs};
+      dispatch(changeProfile(updatedProfile));
+    }
+    useEffect(() =>{
+        if(props.applicants?.filter((applicant:any) => applicant.applicantId == user.id ).length>0){
+          setApplied(true);
+        }else setApplied(false);
+    } , [props])
   const data = DOMPurify.sanitize(props.description);
   return <div className="w-2/3">
     <div className="flex justify-between">
@@ -20,11 +42,19 @@ const JobDesc = (props:any) => {
           </div>
         </div>
         <div className="flex flex-col gap-2 items-center">
-          <Link to={`/apply-job/${props.id}`}>
+          {(props.edit || !applied) &&<Link to={`/apply-job/${props.id}`}>
           <Button color="brightSun.4" size="sm" variant="light" >{props.edit?"Edit":"Apply"}</Button>
-           </Link>
+           </Link>}
+          {
+           applied&&   <Button color="green.8" size="sm" variant="light" >Applied</Button>
+          }
+
+
           {props.edit? <Button color="red.5" size="sm" variant="outline" >Delete</Button>
-          :<IconBookmark className="cursor-pointer text-bright-sun-400" stroke={1.5} />}
+          :profile.savedJobs ?.includes(props.id) ?<IconBookmarkFilled onClick={handleSaveJob} className=" text-bright-sun-400 cursor-pointer" />
+
+          :<IconBookmark onClick={handleSaveJob}  className="text-mine-shaft-300 hover:text-bright-sun-400 cursor-pointer" />
+          }
         </div>
           
       </div>
