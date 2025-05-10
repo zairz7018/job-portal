@@ -52,7 +52,7 @@ const CertiInput = (props:any) => {
     <div className="text-lg font-semibold">Add Certificate</div>
     <div className="flex gap-10 [&>*]:w-1/2">
       <TextInput label="Title" withAsterisk placeholder="Enter Title" {...form.getInputProps("name")} />
-      <SelectInput form={form} name="company" {...select[1]}/>
+      <SelectInput form={form} name="issuer" {...select[1]}/>
     </div>
 
     <div className="flex gap-10 [&>*]:w-1/2">

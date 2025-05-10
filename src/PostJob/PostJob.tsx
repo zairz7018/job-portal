@@ -7,9 +7,11 @@ import Company from "../CompanyProfile/Company";
 import { postJob } from "../Services/JobService";
 import { ErrorNotification, SuccessNotification } from "../Services/NotificationService";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const PostJob = () => {
+  const user = useSelector((state:any) => state.user);
   const navigate = useNavigate();
   const select = fields;
   const form = useForm({
@@ -41,9 +43,19 @@ const PostJob = () => {
   const handlePost = () =>{
     form.validate();
     if(!form.isValid())return;
-    postJob(form.getValues()).then((res) =>{
+    postJob({...form.getValues() ,postedBy:user.id , jobStatus:"ACTIVE" }).then((res) =>{
       SuccessNotification("Success" , "Job Posted Successfuly");
-      navigate("/posted-job");
+      navigate(`/posted-job/${res.id}`);
+    }).catch((err) =>{
+      console.log(err);
+      ErrorNotification("Error", err.response.data.errorMessage);
+    })
+  }
+
+  const handleDraft = () =>{
+    postJob({...form.getValues() ,postedBy:user.id , jobStatus:"DRAFT" }).then((res) =>{
+      SuccessNotification("Success" , "Job Drafted Successfuly");
+      navigate(`/posted-job/${res.id}`);
     }).catch((err) =>{
       console.log(err);
       ErrorNotification("Error", err.response.data.errorMessage);
@@ -85,7 +97,7 @@ const PostJob = () => {
       </div>
       <div className="flex gap-4">
       <Button color="brightSun.4" onClick={handlePost} variant="light" >Public job</Button>
-      <Button color="brightSun.4" variant="outline" >Save As Draft</Button>
+      <Button color="brightSun.4" variant="outline" onClick={handleDraft} >Save As Draft</Button>
       </div>
     </div>
   </div>

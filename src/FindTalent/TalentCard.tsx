@@ -5,34 +5,63 @@ import { Avatar, Button, Divider, Modal, Text } from "@mantine/core";
 import { DateInput, TimeInput } from "@mantine/dates";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCalendarMonth, IconHeart, IconMapPin } from "@tabler/icons-react";
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getProfile } from "../Services/ProfileService";
+import { changeAppStatus } from "../Services/JobService";
+import { ErrorNotification, SuccessNotification } from "../Services/NotificationService";
 
 const TalentCard=(props:any)=>{
   const [opened,{open , close}] = useDisclosure(false);
-  const [value,setValue] = useState<Date | null>(null);
+  const [date,setDate] = useState<Date | null>(null);
+  const [time , setTime] = useState<any>(null);
   const ref = useRef<HTMLInputElement>(null);
+  const [profile , setProfile] = useState<any>({});
+  const {id} = useParams();
+  useEffect(() =>{
+    if(props.applicantId)getProfile(props.applicantId).then((res) =>{
+      setProfile(res);
+    }).catch((err) =>{
+      console.log(err);
+    })
+    else setProfile(props);
+  } , [props])
+  const handleOffer = (status:string) =>{
+    const[hours , minutes] = time.split(":").map(Number);
+    date?.setHours(hours , minutes) ;
+    console.log(date);
+    let interview:any = {id , applicantId:profile?.id , applicationStatus : status}
+    changeAppStatus(interview).then((res)=>{
+      SuccessNotification("Interview Scheduled" , "Interview Scheduled Successfully")
+      window.location.reload();
+    }).catch((err) =>{
+      console.log(err);
+      ErrorNotification("Error" , err.response.data.errorMessage);
+    })
+  }
     return <div className="bg-mine-shaft-900 p-4 w-96 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center ">
           <div className="p-2 bg-mine-shaft-800 rounded-md ">
-            <Avatar size="lg" src={`/${props.image}.png`} alt="" />
+            <Avatar size="lg" src={profile?.picture?
+              `data:image/jpeg;base64,${profile?.picture}`:
+              "/avatar.png" } alt="" />
           </div>
           <div>
             <div className="font-semibold text-lg">{props.name}</div>
-            <div className="text-sm text-mine-shaft-300">{props.company} &bull; </div>
+            <div className="text-sm text-mine-shaft-300">{profile?.jobTitle} &bull; {profile?.company} </div>
           </div>
         </div>
         <IconHeart className="text-mine-shaft-300 cursor-pointer" />
       </div>
       <div className="flex gap-2">
         {
-          props.topSkills?.map((skill:any , index:any) =><div key={index} className="  py-2 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs"> {skill}</div>)
+          profile?.skills?.map((skill:any , index:any) => index<4 &&  <div key={index} className="  py-2 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs"> {skill}</div>)
         }
         
       </div>
       <div>
-        <Text className="!text-xs text-justify !text-mine-shaft-300" lineClamp={3} > {props.about}
+        <Text className="!text-xs text-justify !text-mine-shaft-300" lineClamp={3} > {profile?.about}
         </Text>
       </div>
       
@@ -43,10 +72,10 @@ const TalentCard=(props:any)=>{
         </div> :
         <div className="flex justify-between">
         <div className="font-semibold text-mine-shaft-200">
-        {props.expectedCtc}
+        200 Euro
         </div>
         <div className="flex gap-1 text-xs text-mine-shaft-400 items-center">
-          <IconMapPin className="h-5  w-5" stroke={1.5} />{props.location}
+          <IconMapPin className="h-5  w-5" stroke={1.5} />{profile?.location}
         </div>
       </div>
       }
@@ -79,9 +108,11 @@ const TalentCard=(props:any)=>{
       </div>
       <Modal opened={opened} onClose={close} title="schedule Interview" centered >
         <div className="flex flex-col gap-4">
-          <DateInput value={value} minDate={new Date()} onChange={setValue} label="date" placeholder="Entrer Date" />
-          <TimeInput label="Time" ref={ref} onClick={()=>ref.current?.showPicker()} />
-          <Button color="brightSun.4" variant="light" fullWidth>Schedule</Button>
+          <DateInput value={date} minDate={new Date()} onChange={setDate} label="date" placeholder="Entrer Date" />
+          <TimeInput label="Time" ref={ref} value={time} onChange={(event)=>setTime(event.currentTarget.value)}
+           onClick={()=>ref.current?.showPicker()} />
+          <Button onClick={() => handleOffer("INTERVIEWING")}
+           color="brightSun.4" variant="light" fullWidth>Schedule</Button>
         </div>
       </Modal>
     </div>
