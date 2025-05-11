@@ -6,9 +6,11 @@ const PostedJob = (props: any) => {
   const [activeTab, setActiveTab] = useState<string | null>("ACTIVE");
 
   useEffect(() => {
-    setActiveTab(props.job?.jobStatus || "ACTIVE");
+    if (props.job) {
+      setActiveTab(props.job?.jobStatus || "ACTIVE");
+    }
   }, [props.job]);
-
+  
   return (
     <div className="w-1/6 mt-5">
       <div className="text-2xl font-semibold mb-5 mt-5">Jobs</div>

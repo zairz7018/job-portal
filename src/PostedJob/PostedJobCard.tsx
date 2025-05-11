@@ -8,7 +8,7 @@ const PostedJobCard = (props: any) => {
 
   return (
     <Link
-      to={`/posted-job/${props.id}`}
+      to={`/posted-jobs/${props.id}`}
       className={`rounded-xl p-2 border-l-2 cursor-pointer
         ${
           String(props.id) === id

@@ -27,13 +27,16 @@ const TalentCard=(props:any)=>{
     else setProfile(props);
   } , [props])
   const handleOffer = (status:string) =>{
-    const[hours , minutes] = time.split(":").map(Number);
+    const [hours , minutes] = time.split(":").map(Number);
     date?.setHours(hours , minutes) ;
-    console.log(date);
-    let interview:any = {id , applicantId:profile?.id , applicationStatus : status}
+    let interview:any = {id , applicantId:profile?.id , 
+      applicationStatus : status , interviewTime: date};
     changeAppStatus(interview).then((res)=>{
       SuccessNotification("Interview Scheduled" , "Interview Scheduled Successfully")
-      window.location.reload();
+      console.log(status);
+      console.log(props);
+      
+      // window.location.reload();
     }).catch((err) =>{
       console.log(err);
       ErrorNotification("Error" , err.response.data.errorMessage);
