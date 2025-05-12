@@ -13,14 +13,18 @@ const Header = () => {
   const dispatch=useDispatch();
     const user = useSelector((state:any)=>state.user); 
     
-    useEffect(()=>{
-      getProfile(user.id).then((data:any)=>{
-        console.log("Fetched profile data:", data);
-        dispatch(setProfile(data));
-      }).catch((error:any)=>{
-        console.log(error);
-      });
-    }, []);
+    useEffect(() => {
+      if (user?.id) { // Vérifie si `user` et `user.id` existent
+        getProfile(user.id)
+          .then((data: any) => {
+            console.log("Fetched profile data:", data);
+            dispatch(setProfile(data));
+          })
+          .catch((error: any) => {
+            console.log(error);
+          });
+      }
+    }, [user]); // Dépendance sur `user` pour relancer si `user` change
   const location = useLocation();
   return location.pathname!=="/signup" && location.pathname!="/login" ?<div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
       <div className="flex gap-1 items-center  text-bright-sun-400" >

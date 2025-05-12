@@ -55,7 +55,7 @@ const PostJob = () => {
   const handleDraft = () =>{
     postJob({...form.getValues() ,postedBy:user.id , jobStatus:"DRAFT" }).then((res) =>{
       SuccessNotification("Success" , "Job Drafted Successfuly");
-      navigate(`/posted-job/${res.id}`);
+      navigate(`/posted-jobs/${res.id}`);
     }).catch((err) =>{
       console.log(err);
       ErrorNotification("Error", err.response.data.errorMessage);

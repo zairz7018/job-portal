@@ -5,7 +5,8 @@ import TalentCard from "../FindTalent/TalentCard";
 
 const PostedJobDesc = (props:any) => {
   return <div className="mt-5 w-3/4 px-5">
-    <div className="text-2xl font-semibold flex items-center">{props.jobTitle} <Badge variant="light" ml='sm' size="sm" color="brightSun.4" >{props.jobStatus}</Badge></div>
+      {props.jobTitle?<> 
+        <div className="text-2xl font-semibold flex items-center">{props.jobTitle} <Badge variant="light" ml='sm' size="sm" color="brightSun.4" >{props.jobStatus}</Badge></div>
     <div className="font-medium text-mine-shaft-300 mb-3">
       {props.location } 
     </div>
@@ -34,8 +35,24 @@ const PostedJobDesc = (props:any) => {
                       props.applicants?.filter((x:any) => x.applicationStatus =='INTERVIEWING').map((talent:any,index:any)=> <TalentCard key={index} {...talent} invited />)
                   }
                   </div> </Tabs.Panel>
+
+                  <Tabs.Panel value="offered" > 
+                <div className="flex mt-10 flex-wrap gap-5 justify-around">
+                  {
+                      props.applicants?.filter((x:any) => x.applicationStatus ==='OFFERED').map((talent:any,index:any)=> <TalentCard key={index} {...talent} offered />)
+                  }
+                  </div> </Tabs.Panel>
+
+                  <Tabs.Panel value="rejected" > 
+                <div className="flex mt-10 flex-wrap gap-5 justify-around">
+                  {
+                      props.applicants?.filter((x:any) => x.applicationStatus ==='REJECTED').map((talent:any,index:any)=> <TalentCard key={index} {...talent} rejected />)
+                  }
+                  </div> </Tabs.Panel>
                 </Tabs>
     </div>
+    </>: <div className="text-2xl font-semibold min-h-[70vh] flex justify-center items-center"> No Job Selected</div>
+    }
   </div>
 }
 export default PostedJobDesc;

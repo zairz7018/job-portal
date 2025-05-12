@@ -1,6 +1,10 @@
 // import { IconBookmark } from "@tabler/icons-react";
 
-const ExpCard = (props:any) => {
+import { formatDate } from "../Services/Utilities";
+
+const ExpCard = (props:any) => {  
+  console.log("Rendering ExpCard with", props);
+
   return <div className="flex flex-col gap-2">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center ">
@@ -13,7 +17,7 @@ const ExpCard = (props:any) => {
           </div>
         </div>
         <div className="text-sm text-mine-shaft-300">
-          {props.startDate} - {props.endDate}
+          {formatDate(props.startDate)} - {formatDate(props.endDate)}
         </div>
         </div>
         <div className="text-sm text-mine-shaft-300 text-justify">
