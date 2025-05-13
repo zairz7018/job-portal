@@ -25,8 +25,11 @@ const PostedJob = (props: any) => {
             <Tabs.Tab value="ACTIVE">
               Active [{props.jobList?.filter((job: any) => job?.jobStatus === "ACTIVE").length}]
             </Tabs.Tab>
-            <Tabs.Tab value="DRAFT">
+            <Tabs.Tab value="DRAFT" >
               Drafts [{props.jobList?.filter((job: any) => job?.jobStatus === "DRAFT").length}]
+            </Tabs.Tab>
+            <Tabs.Tab value="CLOSED" >
+              Closed [{props.jobList?.filter((job: any) => job?.jobStatus === "CLOSED").length}]
             </Tabs.Tab>
           </Tabs.List>
 
@@ -49,6 +52,19 @@ const PostedJob = (props: any) => {
                 ))}
             </div>
           </Tabs.Panel>
+            <Tabs.Panel value="CLOSED">
+              <div className="flex flex-col gap-5 mt-5">
+                {props.jobList?.filter((job: any) => job?.jobStatus === "CLOSED").length === 0 ? (
+                  <div className="text-sm text-gray-400">No closed jobs.</div>
+                ) : (
+                  props.jobList
+                    ?.filter((job: any) => job?.jobStatus === "CLOSED")
+                    .map((item: any, index: number) => (
+                      <PostedJobCard key={index} {...item} />
+                    ))
+                )}
+              </div>
+            </Tabs.Panel>
         </Tabs>
       </div>
     </div>

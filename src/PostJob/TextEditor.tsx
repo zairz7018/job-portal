@@ -7,6 +7,7 @@ import Superscript from '@tiptap/extension-superscript';
 import Subscript from '@tiptap/extension-subscript';
 import Highlight from '@tiptap/extension-highlight';
 import TextAlign from '@tiptap/extension-text-align';
+import { useEffect } from 'react';
 
 
 
@@ -14,6 +15,9 @@ import TextAlign from '@tiptap/extension-text-align';
   
 
   const TextEditor = (props:any) => {
+    useEffect(()=>{
+      editor?.commands.setContent(props.data);
+    },[props.data])
     const editor = useEditor({
       
       extensions: [

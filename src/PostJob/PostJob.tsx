@@ -4,16 +4,33 @@ import SelectInput from "./SelectInput";
 import TextEditor from "./TextEditor";
 import { isNotEmpty, useForm } from "@mantine/form";
 import Company from "../CompanyProfile/Company";
-import { postJob } from "../Services/JobService";
+import { getJob, postJob } from "../Services/JobService";
 import { ErrorNotification, SuccessNotification } from "../Services/NotificationService";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 
 const PostJob = () => {
+  const {id} = useParams();
+  const [editorData , setEditorData] = useState(content);
   const user = useSelector((state:any) => state.user);
   const navigate = useNavigate();
   const select = fields;
+  useEffect(()=>{
+    window.scrollTo(0,0);
+    if(id!="0"){
+      getJob(id).then((res)=>{
+        form.setValues(res);
+        setEditorData(res.description);
+      }).catch((err) =>{
+        console.log(err);
+      })
+    }else {
+      form.reset();
+      setEditorData(content);
+    }
+  }, [id])
   const form = useForm({
     mode:'controlled',
     validateInputOnChange:true,
@@ -43,9 +60,9 @@ const PostJob = () => {
   const handlePost = () =>{
     form.validate();
     if(!form.isValid())return;
-    postJob({...form.getValues() ,postedBy:user.id , jobStatus:"ACTIVE" }).then((res) =>{
+    postJob({...form.getValues(),id ,postedBy:user.id , jobStatus:"ACTIVE" }).then((res) =>{
       SuccessNotification("Success" , "Job Posted Successfuly");
-      navigate(`/posted-job/${res.id}`);
+      navigate(`/posted-jobs/${res.id}`);
     }).catch((err) =>{
       console.log(err);
       ErrorNotification("Error", err.response.data.errorMessage);
@@ -93,7 +110,7 @@ const PostJob = () => {
       
       <div className="[&_button[data-active='true']]:!text-bright-sun-300  [&_button[data-active='true']]:!bg-bright-sun-400/20">
         <div className="text-sm font-medium">Job Description <span className="text-red-500">*</span></div>
-        <TextEditor form={form} />
+        <TextEditor form={form} data={editorData}/>
       </div>
       <div className="flex gap-4">
       <Button color="brightSun.4" onClick={handlePost} variant="light" >Public job</Button>

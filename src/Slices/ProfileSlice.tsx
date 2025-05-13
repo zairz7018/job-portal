@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { updateProfile } from "../Services/ProfileService";
 
 const ProfileSlice = createSlice({
-  name:"user",
+  name:"profile",
   initialState:{},
   reducers:{
     changeProfile:(state , action)=>{

@@ -19,7 +19,7 @@ const PostedJobCard = (props: any) => {
     >
       <div className="text-sm font-semibold">{props.jobTitle}</div>
       <div className="text-xs font-medium">{props.location}</div>
-      <div className="text-xs">{timeAgo(props.postTime)}</div>
+      <div className="text-xs">{props.jobStatus == 'DRAFT' ? 'Drafted':props.jobStatus=="CLOSED" ?"Closed":"Posted"} {timeAgo(props.postTime)}</div>
     </Link>
   );
 };

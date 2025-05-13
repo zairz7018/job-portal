@@ -30,7 +30,7 @@ const Profile = (props:any) =>{
           </div>
       
           <div className="px-3 mt-16">
-              <div className="text-3xl font-semibold flex justify-between">  Name here  {profile?.name}
+              <div className="text-3xl font-semibold flex justify-between">  Name here  {profile.name}
                 <Button color="brightSun.4" variant="light" >Message </Button>
               </div>
               <div className="text-xl flex gap-1 items-center"> <IconBriefcase className="h-5 w-5" stroke={1.5}  />{profile?.jobTitle} &bull; {profile?.company}</div>
