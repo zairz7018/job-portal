@@ -4,8 +4,8 @@
   import { IconSelector } from '@tabler/icons-react';
   import { useDispatch } from 'react-redux';
   import { updateFilter } from '../Slices/FilterSlice';
-  import { current } from '@reduxjs/toolkit';
 
+  
   const MultiInput = (props: any) => {
     const dispatch = useDispatch();
     useEffect(()=>{

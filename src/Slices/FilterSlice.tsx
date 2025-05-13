@@ -5,8 +5,7 @@ const filterSlice = createSlice({
   initialState:{},
   reducers: {
     updateFilter: (state, action) => {
-      state = { ...state, ...action.payload }; // Fusionne les anciens et nouveaux filtres
-      // console.log(state);
+      state = { ...state, ...action.payload }; 
       return state;
     },
     resetFilter: (state) => {

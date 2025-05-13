@@ -7,6 +7,7 @@ import { resetFilter } from "../Slices/FilterSlice";
 
 const Talents = () => {
   const dispatch = useDispatch();
+  const sort = useSelector((state : any) => state.sort);
   const [talents, setTalents] = useState<any>([]);
   const filter = useSelector((state : any) => state.filter);
   const [filtredTalents , setFiltredTalents] = useState<any>([]);
@@ -20,6 +21,14 @@ const Talents = () => {
         console.error("Erreur lors du chargement des profils :", err);
       });
   }, []);
+
+  useEffect(()=>{
+    if(sort === "Experience :Low to high"){
+      setTalents([...talents].sort((a:any,b:any) => a.totalExp - b.totalExp));
+    }else if(sort === "Experience :high to low"){
+      setTalents([...talents].sort((a:any,b:any) => b.totalExp - a.totalExp));
+    }
+  },[sort])
   
   useEffect(() => {
     let filtered = talents;
@@ -94,7 +103,7 @@ if (expRange.length === 2 &&
 
 
   return (
-    <div className="p-5">
+    <div className="px-5 py-5">
       <div className="flex justify-between">
         <div className="text-2xl font-semibold">Talents</div>
         <Sort />
