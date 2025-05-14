@@ -20,7 +20,7 @@ const Jobs=()=>{
       dispatch(resetFilter());
       dispatch(resetSort());
       setJobList(res.filter((job:any)=> job.jobStatus === "ACTIVE"));
-      console.log(res[0]);
+      // console.log(res[0]);
 
     }).catch((err) =>{
       console.log(err);

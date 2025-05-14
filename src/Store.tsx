@@ -3,6 +3,7 @@ import  useReducer  from "./Slices/UserSlice";
 import  ProfileReducer  from "./Slices/ProfileSlice";
 import filterReducer from "./Slices/FilterSlice";
 import sortReducer from "./Slices/SortSlice"; // ✅ IMPORT MANQUANT
+import jwtReducer from "./Slices/JwtSlice"
 
 
 
@@ -11,6 +12,7 @@ export default configureStore({
     user: useReducer ,
     profile: ProfileReducer,
     filter: filterReducer, 
-    sort: sortReducer
+    sort: sortReducer,
+    jwt: jwtReducer
   },
 })

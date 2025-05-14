@@ -18,7 +18,7 @@ const Talents = () => {
         setTalents(res);
       })
       .catch((err) => {
-        console.error("Erreur lors du chargement des profils :", err);
+        // console.error("Erreur lors du chargement des profils :", err);
       });
   }, []);
 

@@ -2,13 +2,15 @@ import { Anchor, Button, Checkbox, LoadingOverlay, PasswordInput, rem, TextInput
 import { IconAt, IconCheck, IconLock, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import { LoginUser } from "../Services/UserService";
+// import { LoginUser } from "../Services/UserService";
 import { LoginValidation } from "../Services/FormValidation";
-import { notifications } from "@mantine/notifications";
 import { useDisclosure } from "@mantine/hooks";
 import ResetPassword from "./ResetPassword";
 import { useDispatch } from "react-redux";
 import { ErrorNotification, SuccessNotification } from "../Services/NotificationService";
+import { setJwt } from "../Slices/JwtSlice";
+import { LoginUser } from "../Services/AuthService";
+import { jwtDecode } from "jwt-decode";
 import { setUser } from "../Slices/UserSlice";
 
 const form={
@@ -38,17 +40,20 @@ const Login = () => {
     }
     setFormError(newFormError);
     if(valid){
+      setLoading(true);
       LoginUser(data).then((res)=>{
         SuccessNotification("Login Success", "Redirecting to Home");
+                dispatch(setJwt(res.jwt));
+                localStorage.setItem("token", res.jwt);
+                const decoded = jwtDecode(res.jwt);
+                console.log(decoded);
+                  dispatch(setUser({...decoded , email:decoded.sub}));
                 setTimeout(() => {
-                  setLoading(false);
-                  dispatch(setUser(res))
+                  
                   navigate("/");
-                }, 4000);
+                },4000 );
       }).catch((err)=>{
-        setLoading(false);
-        console.log(err);
-    
+        setLoading(false);    
         ErrorNotification("Login Failed", err.response.data.errorMessage);
       });
     }
