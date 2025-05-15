@@ -1,11 +1,15 @@
+const { keyframes } = require('@emotion/react')
+const { extend } = require('dayjs')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{html,js,jsx,ts,tsx}", // Ajoute cette ligne
   ],
   theme: {
-    extend: {
-      colors:{
+     
+      extend:{
+        colors:{
         'mine-shaft': {
           '50': '#f6f6f6',
           '100': '#e7e7e7',
@@ -33,10 +37,39 @@ module.exports = {
           '900': '#7a330d',
           '950': '#461902',
             },
+        keyframes : {
+          'option-Animation': {
+            from: {
+              transform: 'translateX(20px)',
+              opacity: 0,
+            },
+            to:{
+              transform: 'translatex(0)',
+              opacity: 1,
+            }
+          }
+        },
+        animation:{
+        'option-Animation' : 'option-Animation 200ms forwards',
+      }
+    }
 
+      },
+      
+      screens:{
+        'xsm': '320px',
+        'xs':'476px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
 
+        '2xl-mx': '1536px',
+        'xl-mx': '1279px',
+        'lg-mx': '1023px'
       }
     },
-  },
+
   plugins: [],
-}
+  }  

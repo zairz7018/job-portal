@@ -22,7 +22,7 @@
       },
       (error) => {
         if (error.response.status === 401) {
-          // localStorage.removeItem("token");
+          localStorage.removeItem("token");
           navigate("/login");
         }
         return Promise.reject(error);

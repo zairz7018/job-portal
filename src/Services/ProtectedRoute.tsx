@@ -14,7 +14,8 @@ const ProtectedRoute :React.FC<ProtectedRouteProps> = ({ children, allowedRoles 
     return <Navigate to="/login" />;
   }
   const decoded: any = jwtDecode(token);
-  if (allowedRoles && !allowedRoles.includes(decoded.applicantType)) return <Navigate to="/unauthorized" />;
+  // console.log(decoded);
+  // if (allowedRoles && !allowedRoles.includes(decoded.applicantType)) return <Navigate to="/unauthorized" />;
   return children;
 }
 export default ProtectedRoute;
