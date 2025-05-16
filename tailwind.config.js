@@ -1,5 +1,4 @@
-const { keyframes } = require('@emotion/react')
-const { extend } = require('dayjs')
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,9 +6,8 @@ module.exports = {
     "./src/**/*.{html,js,jsx,ts,tsx}", // Ajoute cette ligne
   ],
   theme: {
-     
-      extend:{
-        colors:{
+    extend: {
+      colors: {
         'mine-shaft': {
           '50': '#f6f6f6',
           '100': '#e7e7e7',
@@ -22,9 +20,9 @@ module.exports = {
           '800': '#454545',
           '900': '#3d3d3d',
           '950': '#2d2d2d',
-          },
+        },
 
-          'bright-sun': {
+        'bright-sun': {
           '50': '#fffbeb',
           '100': '#fff3c6',
           '200': '#ffe588',
@@ -36,40 +34,42 @@ module.exports = {
           '800': '#943c0c',
           '900': '#7a330d',
           '950': '#461902',
-            },
-        keyframes : {
-          'option-Animation': {
-            from: {
-              transform: 'translateX(20px)',
-              opacity: 0,
-            },
-            to:{
-              transform: 'translatex(0)',
-              opacity: 1,
-            }
-          }
         },
-        animation:{
-        'option-Animation' : 'option-Animation 200ms forwards',
-      }
-    }
-
       },
-      
-      screens:{
-        'xsm': '320px',
-        'xs':'476px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
-
-        '2xl-mx': '1536px',
-        'xl-mx': '1279px',
-        'lg-mx': '1023px'
-      }
+      keyframes: {
+        'option-Animation': {
+          from: {
+            transform: 'translateX(20px)',
+            opacity: 0,
+          },
+          to: {
+            transform: 'translateX(0)',
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        'option-Animation': 'option-Animation 200ms forwards',
+      },
     },
-
+    screens: {
+      'xsm': '320px',
+      'xs': '476px',
+      'sm': '640px',
+      'md': '768px',
+      'bsm': '900px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      'xs-mx': {'max':'475px'},
+      'sm-mx': {'max':'639px'},
+      'xsm-mx': {'max':'319px'},
+      '2xl-mx': {'max':'1536px'},
+      'xl-mx': {'max':'1279px'},
+      'lg-mx': {'max':'1023px'},
+      'bs-mx': {'max': '900px'},
+      'md-mx': {'max': '767px'}
+    }
+  },
   plugins: [],
-  }  
+};

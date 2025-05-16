@@ -4,8 +4,10 @@ import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const location = useLocation();
-  return location.pathname!="/signup" && location.pathname!="/login" ?  <div className="pt-20 pb-5 flex gap-5 justify-around bg-mine-shaft-950 font-['poppins']">
-        <div className="w-1/4 flex flex-col gap-4">
+  return location.pathname!="/signup" && location.pathname!="/login" ?  <div className="pt-20 pb-5 flex 
+  gap-8 flex-wrap  
+      justify-around bg-mine-shaft-950 font-['poppins']">
+        <div className="w-1/4 sm-mx:h-1/3 xs-mx:w-1/2 xsm:w-full flex flex-col gap-4">
             <div className="flex gap-1 items-center text-bright-sun-400" >
               <IconAnchor stroke={2.5} className="h-6 w-6"/>
               <div className="text-3xl font-semibold">JobHook</div>

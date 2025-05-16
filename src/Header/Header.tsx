@@ -50,8 +50,8 @@ const Header = () => {
   return location.pathname!=="/signup" && location.pathname!="/login" ?<div className="w-full bg-mine-shaft-950 px-6 text-white flex justify-between h-28 items-center font-['poppins']">
       <div className="flex gap-1 items-center  text-bright-sun-400" >
 
-      <IconAnchor stroke={2.5} className="h-8 w-8"/>
-      <div className="text-3xl font-semibold">JobHook</div>
+      <IconAnchor stroke={2.5}  className=" h-8 w-8"/>
+      <div className="text-3xl font-semibold xs-mx:hidden">JobHook</div>
         
       </div>
 
@@ -74,7 +74,7 @@ const Header = () => {
         {
           
         }
-        <Burger opened={opened} onClick={open} aria-label='Toogle navigation' />
+        <Burger className='bs:hidden' opened={opened} onClick={open} aria-label='Toogle navigation' />
         <Drawer size='xs' overlayProps={{backgroundOpacity:0.5 , blur: 4}} position='right'
         closeButtonProps={{icon: <IconX  size={30} />}}
          opened={opened} onClose={close} >
