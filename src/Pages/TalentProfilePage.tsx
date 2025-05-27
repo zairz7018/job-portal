@@ -26,7 +26,7 @@ const TalentProfilePage = () => {
                    leftSection={<IconArrowLeft size={20} />} my="sm"
                    color="brightSun.4" variant="light" >Back</Button>
                 
-        <div className="flex gap-5">
+        <div className="flex gap-5 lg-mx:flex-wrap">
             <Profile  {...profile}/>
             <RecommendTalent talents={talents} />
         </div>

@@ -5,10 +5,12 @@ import { useState } from "react";
 import { TagsInput } from "@mantine/core";
 import { SuccessNotification } from "../Services/NotificationService";
 import { changeProfile } from "../Slices/ProfileSlice";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Skills = () => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
+  const matches = useMediaQuery("(max-width: 475px)");
   const profile = useSelector((state: any) => state.profile);
   const [skills, setSkills] = useState<string[]>([]);
 
@@ -38,7 +40,7 @@ const Skills = () => {
               variant="subtle"
               color="green.8"
               onClick={handleSave}
-              size="lg"
+              size={matches ? "md" : "lg"}
             >
               <IconCheck className="h-4/5 w-4/5" />
             </ActionIcon>
@@ -47,7 +49,7 @@ const Skills = () => {
             variant="subtle"
             color={edit ? "red.8" : "brightSun.4"}
             onClick={handleEdit}
-            size="lg"
+            size={matches ? "md" : "lg"}
           >
             {edit ? (
               <IconX className="h-4/5 w-4/5" />

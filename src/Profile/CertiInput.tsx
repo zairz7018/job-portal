@@ -6,8 +6,10 @@ import { isNotEmpty, useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 import { SuccessNotification } from "../Services/NotificationService";
 import { changeProfile } from "../Slices/ProfileSlice";
+import { useMediaQuery } from "@mantine/hooks";
 
 const CertiInput = (props:any) => {
+  const matches = useMediaQuery("(max-width: 475px)");
   const dispatch = useDispatch();
   const profile = useSelector((state:any)=>state.profile);
   const select = fields;
@@ -50,7 +52,7 @@ const CertiInput = (props:any) => {
 
   return <div className="flex flex-col gap-3">
     <div className="text-lg font-semibold">Add Certificate</div>
-    <div className="flex gap-10 [&>*]:w-1/2">
+    <div className="flex gap-10 md-mx:gap-5 [&>*]:w-1/2 xs-mx:[&>*]:w-full xs-mx:flex flex-wrap my-3">
       <TextInput label="Title" withAsterisk placeholder="Enter Title" {...form.getInputProps("name")} />
       <SelectInput form={form} name="issuer" {...select[1]}/>
     </div>

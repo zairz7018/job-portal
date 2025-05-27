@@ -7,9 +7,11 @@ import { useForm } from "@mantine/form";
 import { useDispatch, useSelector } from "react-redux";
 import { changeProfile } from "../Slices/ProfileSlice";
 import { SuccessNotification } from "../Services/NotificationService";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Info=()=>{
   const profile = useSelector((state:any)=>state.profile)
+  const matches = useMediaQuery("(max-width: 475px)");
   const dispatch= useDispatch();
   const user=useSelector((state:any)=>state.user);
   const select = fields;
@@ -33,32 +35,40 @@ const Info=()=>{
       SuccessNotification("Success" , "Profile updated Successfuly !")
   }
   return <>
-  <div className="text-3xl font-semibold flex justify-between">{user.name}
+  <div className="text-3xl font-semibold flex justify-between xs-mx:text-2xl xsm-mx:text-xl">{user.name}
      <div>
-     {edit&& <ActionIcon variant="subtle" color="green.8" onClick={handleSave} size='lg' >
+     {edit&& <ActionIcon variant="subtle" color="green.8" onClick={handleSave} size={matches ? "md" : "lg"} >
      <IconCheck className="h-4/5 w-4/5" stroke={1.5}/> </ActionIcon>}
-     <ActionIcon variant="subtle" color={edit?"red.8":"brightSun.4"} onClick={handleEdit} size='lg' >
+     <ActionIcon variant="subtle" color={edit?"red.8":"brightSun.4"} onClick={handleEdit} size={matches ? "md" : "lg"} >
           {edit ?<IconX className="h-4/5 w-4/5"/>:<IconPencil className="h-4/5 w-4/5" stroke={1.5}  />}              
      </ActionIcon> 
       </div> 
       </div>
                     
               {
-                edit?<><div className="flex gap-10 [&>*]:w-1/2">
-                <SelectInput form={form} name="jobTitle" {...select[0]}/>
-                <SelectInput form={form} name="company"  {...select[1]}/>
-                      </div>
-                      <div className="flex gap-10 [&>*]:w-1/2">
-                      <SelectInput form={form} name="location"  {...select[2]}/>
-                      <NumberInput label = "Experience : " withAsterisk hideControls clampBehavior="strict" min={1} max={50}
-                       {...form.getInputProps('totalExp')} />
-                      </div>
+                edit?<><div className="flex gap-10 flex-wrap xs-mx:flex-col xs-mx:gap-4">
+        <SelectInput form={form} name="jobTitle" {...select[0]} />
+        <SelectInput form={form} name="company" {...select[1]} />
+      </div>
+
+      <div className="flex gap-10 flex-wrap xs-mx:flex-col xs-mx:gap-4 mt-4">
+        <SelectInput form={form} name="location" {...select[2]} />
+        <NumberInput
+          label="Experience : "
+          withAsterisk
+          hideControls
+          clampBehavior="strict"
+          min={1}
+          max={50}
+          {...form.getInputProps('totalExp')}
+        />
+      </div>
                 </>:<>
-                <div className="text-xl flex gap-1 items-center"> <IconBriefcase className="h-5 w-5" stroke={1.5}  />{profile.jobTitle} &bull; {profile.company}</div>
-              <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
+                <div className="text-xl flex gap-1 items-center xs-mx:text-base"> <IconBriefcase className="h-5 w-5" stroke={1.5}  />{profile.jobTitle} &bull; {profile.company}</div>
+              <div className="text-lg flex gap-1 items-center text-mine-shaft-300 xs-mx:text-base">
                 <IconMapPin className="h-5 w-5" stroke={1.5} />{profile?.location}
               </div>
-              <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
+              <div className="text-lg flex gap-1 items-center text-mine-shaft-300 xs-mx:text-base">
                 <IconBriefcase className="h-5 w-5" stroke={1.5} />Experience : {profile.totalExp} Years
               </div>
               </>

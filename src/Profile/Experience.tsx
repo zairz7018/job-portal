@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import ExpInput from "./ExpInput";
 import ExpCard from "./ExpCard";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Experience = () => {
   const profile = useSelector((state:any)=>state.profile);
+  const matches = useMediaQuery("(max-width: 475px)");
   const [edit , setEdit] = useState(false);
   const [addExp , setAddExp] = useState(false);
   const handleEdit = () =>{
@@ -21,7 +23,7 @@ const Experience = () => {
             onClick={() => setAddExp(true)}
             variant="subtle"
             color="brightSun.4"
-            size="lg"
+            size={matches ? "md" : "lg"}
           >
             <IconPlus className="h-4/5 w-4/5" />
           </ActionIcon>
@@ -29,7 +31,7 @@ const Experience = () => {
             variant="subtle"
             color={edit ? "red.8" : "brightSun.4"}
             onClick={handleEdit}
-            size="lg"
+            size={matches ? "md" : "lg"}
           >
             {edit ? (
               <IconX className="h-4 w-4" />

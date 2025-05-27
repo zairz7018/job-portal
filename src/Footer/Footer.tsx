@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="w-1/4 sm-mx:h-1/3 xs-mx:w-1/2 xsm:w-full flex flex-col gap-4">
             <div className="flex gap-1 items-center text-bright-sun-400" >
               <IconAnchor stroke={2.5} className="h-6 w-6"/>
-              <div className="text-3xl font-semibold">JobHook</div>
+              <div className="text-3xl font-semibold">EliteHire</div>
                 
             </div>
             <div className="text-sm text-mine-shaft-300">Job Portal with user profiles, skill updates,  certifications, work experience and admin job postings.</div>

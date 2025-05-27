@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SuccessNotification } from "../Services/NotificationService";
 import { changeProfile } from "../Slices/ProfileSlice";
+import { useMediaQuery } from "@mantine/hooks";
 
 const About = () => {
+  const matches = useMediaQuery("(max-width: 475px)");
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const profile = useSelector((state: any) => state.profile);
@@ -31,7 +33,7 @@ const About = () => {
         About
         <div>
           {edit && (
-            <ActionIcon variant="subtle" color="green.8" onClick={handleSave} size="lg">
+            <ActionIcon variant="subtle" color="green.8" onClick={handleSave} size={matches ? "md" : "lg"}>
               <IconCheck className="h-4/5 w-4/5" />
             </ActionIcon>
           )}
@@ -40,7 +42,7 @@ const About = () => {
             variant="subtle"
             color={edit ? "red.8" : "brightSun.4"}
             onClick={handleEdit}
-            size="lg"
+            size={matches ? "md" : "lg"}
           >
             {edit ? (
               <IconX className="h-4/5 w-4/5" />
@@ -60,7 +62,7 @@ const About = () => {
           onChange={(event) => setAbout(event.target.value)}
         />
       ) : (
-        <div className="text-sm text-mine-shaft-300 text-justify">
+        <div className="text-sm text-mine-shaft-300 text-justify ">
           {profile?.about}
         </div>
       )}

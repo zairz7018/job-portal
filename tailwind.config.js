@@ -52,6 +52,7 @@ module.exports = {
         'option-Animation': 'option-Animation 200ms forwards',
       },
     },
+    
     screens: {
       'xsm': '320px',
       'xs': '476px',

@@ -34,13 +34,15 @@ import { getBase64 } from "../Services/Utilities";
       SuccessNotification("Success" , "Profile picture changed Successfully ");
     }
     
-  return <div className="w-4/5 mx-auto">
-    <div className="">
-    <div className="relative">
-        <img className="rounded-t-2xl" src="/profile/banner.jpg" alt="" />
-        <div ref={ref} className="absolute flex items-center justify-center -bottom-1/3 left-3">
+  return <div className="w-4/5 mx-auto lg-mx:w-full">
+    <div className=" ">
+    <div className="relative px-5">
+        <img className="rounded-t-2xl xs-mx:h-38" src="/profile/banner.jpg" alt="" />
+        <div ref={ref} className="absolute flex items-center justify-center rounded-full 
+         -bottom-1/3 left-6 md:-bottom-10 sm:-bottom-16 cursor-pointer">
           
-            <Avatar className="!w-48 !h-48 border-mine-shaft-950 border-8 rounded-full" 
+            <Avatar className="!w-48 !h-48 md:!w-40 md:!h-40 border-mine-shaft-950 border-8 rounded-full sm:!w-36 sm:!h-36 xs-mx:!h-32 xs-mx:!w-32"
+
             src={profile.picture?
               `data:image/jpeg;base64,${profile.picture}`:
               "/avatar.png" }
@@ -55,10 +57,13 @@ import { getBase64 } from "../Services/Utilities";
             " 
             variant="transparent" onChange={handleFileChange}
               accept="image/png,image/jpeg" /> }
+
+              
+            
         </div>
         </div>
     
-          <div className="px-3 mt-16">
+          <div className="px-4 mt-20 ">
               <Info />
         </div>      
               <Divider  my='xl' />

@@ -22,7 +22,7 @@ const ApplyJobPage = () => {
   return (
     <div className="min-h-[90vh] bg-mine-shaft-950 font-['poppins'] p-4">
       <Divider size="xs"  />
-                  <Button leftSection={<IconArrowLeft size={20} />} my="md"
+                  <Button leftSection={<IconArrowLeft size={20} />} my="md" mb="xs"
                   onClick={()=>navigate(-1) }
                   color="brightSun.4" variant="light" >Back</Button>
                

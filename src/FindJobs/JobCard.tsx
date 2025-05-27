@@ -36,7 +36,7 @@ const JobCard=(props:any)=>{
         :<IconBookmark onClick={handleSaveJob}  className="text-mine-shaft-300 hover:text-bright-sun-400 cursor-pointer" />
         }
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.experience}</div>
         <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.jobType}</div>
         <div className="p-2 py-1 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">{props.location}</div>

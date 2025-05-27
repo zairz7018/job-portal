@@ -11,11 +11,11 @@ interface ProtectedRouteProps {
 const ProtectedRoute :React.FC<ProtectedRouteProps> = ({ children, allowedRoles }) => {
   const token = useSelector((state: any) => state.jwt);
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   const decoded: any = jwtDecode(token);
   // console.log(decoded);
-  // if (allowedRoles && !allowedRoles.includes(decoded.applicantType)) return <Navigate to="/unauthorized" />;
+  if (allowedRoles && !allowedRoles.includes(decoded.applicantType)) return <Navigate to="/unauthorized" />;
   return children;
 }
 export default ProtectedRoute;

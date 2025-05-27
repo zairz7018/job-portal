@@ -32,56 +32,62 @@ const SearchBar = () => {
           {matches && <Button variant="outline" autoContrast color="brightSun.4" m='sm' radius='lg' className="align" onClick={toggle}>{opened?"Close":"Filters"}</Button>} 
         
       </div>
-      <Collapse in={(opened || !matches)} >
-      
-    
-    <div className=" px-5 py-8 lg-mx:!flex-wrap  items-center  !text-mine-shaft-100 flex  xs-mx:flex-col "> 
-
-<div className="w-1/5 lg-mx:w1/4 bs-mx:w-[30%] sm-mx:w-[48%]  xs-mx:w-full">
-        <div className="text-bright-sun-400 bg-mine-shaft-950 rounded-full p-1 mr-2 ">
+      <Collapse in={(opened || !matches)}>
+  <div className="px-5 py-8 flex items-center !text-mine-shaft-100 lg-mx:flex-wrap xs-mx:flex-col xs-mx:min-w-full">
+    {/* Talent Name Input - maintenant avec la même largeur que les autres */}
+    <div className="w-1/5 lg-mx:w-1/4 bs-mx:w-[30%] sm-mx:w-[48%] xs-mx:w-full xs-mx:min-w-full">
+      <div className="flex items-center rounded-lg p-2">
+        <div className="text-bright-sun-400 bg-mine-shaft-950 rounded-full p-1 mr-2">
           <IconUserCircle size={20} />
         </div>
         <Input
           defaultValue={name}
           onChange={(e) => handleChange("name", e)}
-          className="[&_input]:!placeholder-mine-shaft-300"
-          variant="unistyled"
+          className="[&_input]:!placeholder-mine-shaft-300 flex-1"
+          variant="unstyled"
           placeholder="Talent Name"
-        />
-        </div>
-        <Divider className="sm-mx:hidden" mr="xs" size="xs" orientation="vertical" />
-      
-      {
-      searchFields.map((item, index) => { 
-        return (
-          <React.Fragment key={index}>
-            <div key={index} className="w-1/5 lg-mx:w1/4 bs-mx:w-[30%] sm-mx:w-[48%]  xs-mx:w-full">  
-            
-              <MultiInput  title={item.title} icon= {item.icon} options={item.options} />
-            </div>
-            <Divider className="sm-mx:hidden" mr="xs" size="xs" orientation="vertical" />
-          </React.Fragment>
-        )
-      })
-    }
-      <div className="w-1/5 lg-mx:w1/4 lg-mx:mt-7 bs-mx:w-[30%] text-sm sm-mx:w-[48%] text-mine-shaft-300  xs-mx:w-full [&_.mantine-Slider-label]:!translate-y-10">
-        <div className="flex mb-1 justify-between">
-          <div>Experience (Year)</div>
-          <div>{value[0]} - {value[1]}</div>
-        </div>
-        <RangeSlider
-          color="brightSun.4"
-          size="xs"
-          max={50}
-          minRange={1}
-          mih={1}
-          onChangeEnd={(e) => handleChange("exp", e)}
-          value={value}
-          onChange={setValue}
         />
       </div>
     </div>
-    </Collapse>
+
+    {!matches && <Divider mr="xs" size="xs" orientation="vertical" />}
+
+    {/* Search Fields */}
+    {searchFields.map((item, index) => (
+      <React.Fragment key={index}>
+        <div className="w-1/5 lg-mx:w-1/4 bs-mx:w-[30%] sm-mx:w-[48%] xs-mx:w-full xs-mx:min-w-full">
+          <MultiInput 
+            title={item.title} 
+            icon={item.icon} 
+            options={item.options} 
+          />
+        </div>
+        {!matches && <Divider mr="xs" size="xs" orientation="vertical" />}
+      </React.Fragment>
+    ))}
+
+    {/* Espacement mobile entre Skills et Experience */}
+    {matches && <div className="h-4 w-full" />}
+
+    {/* Experience Slider */}
+    <div className="w-1/5 lg-mx:w-1/4 bs-mx:w-[30%] sm-mx:w-[48%] xs-mx:w-full xs-mx:min-w-full text-sm text-mine-shaft-300 [&_.mantine-Slider-label]:!translate-y-10">
+      <div className="flex mb-1 justify-between">
+        <div>Experience (Year)</div>
+        <div>{value[0]} - {value[1]}</div>
+      </div>
+      <RangeSlider
+        color="brightSun.4"
+        size="xs"
+        max={50}
+        minRange={1}
+        min={1}
+        onChangeEnd={(e) => handleChange("exp", e)}
+        value={value}
+        onChange={setValue}
+      />
+    </div>
+  </div>
+</Collapse>
     </div>
   );
 };

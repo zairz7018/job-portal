@@ -62,11 +62,11 @@ const JobHistory = () => {
       <div className="text-2xl font-semibold mb-5">Job History</div>
       <div>
         <Tabs variant="outline" radius="lg" value={activeTab} onChange={handleTabChange}>
-          <Tabs.List className="[&_button]:!text-lg font-semibold mb-5 [&_button[data-active='true']]:text-bright-sun-400">
+          <Tabs.List className="[&_button]:!text-lg font-semibold mb-5 [&_button[data-active='true']]:text-bright-sun-400 sm-mx:!text-lg sm-mx:[&_button]:!text-lg xs-mx:[&_button]:!text-base xsm-mx:[&_button]:!text-sm xs-mx:[&_button]:!px-1.5 xs-mx:font-medium xs-mx:[&_button]:!py-2">
             <Tabs.Tab value="APPLIED">Applied</Tabs.Tab>
             <Tabs.Tab value="SAVED">Saved</Tabs.Tab>
             <Tabs.Tab value="OFFERED">Offered</Tabs.Tab>
-            <Tabs.Tab value="INTERVIEWING">Interviewing</Tabs.Tab>
+            <Tabs.Tab value="INTERVIEWING">In Progress </Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value={activeTab}>

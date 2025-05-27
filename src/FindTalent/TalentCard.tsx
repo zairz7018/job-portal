@@ -69,7 +69,9 @@ const TalentCard = (props: any) => {
 
 
   return (
-    <div className="bg-mine-shaft-900 p-4 w-96 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400">
+    <div className="bg-mine-shaft-900 p-4 w-96 flex flex-col gap-3 rounded-xl hover:shadow-[0_0_5px_1px_yellow] !shadow-bright-sun-400
+    transition duration-300 ease-in-out bs-mx:w-[48%] md-mx:w-full 
+    ">
       <div className="flex justify-between">
         <div className="flex gap-2 items-center">
           <div className="p-2 bg-mine-shaft-800 rounded-md">
@@ -89,7 +91,7 @@ const TalentCard = (props: any) => {
         <IconHeart className="text-mine-shaft-300 cursor-pointer" />
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap">
         {profile?.skills?.map((skill: any, index: any) =>
           index < 4 ? (
             <div key={index} className="py-2 bg-mine-shaft-800 text-bright-sun-400 rounded-lg text-xs">

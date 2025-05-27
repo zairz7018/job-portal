@@ -61,14 +61,14 @@ const ApplicationForm =() =>{
      visible={Submit} zIndex={1000} overlayProps={{ radius:'sm' , blur : 2 }} loaderProps={{color:'brightSun.4' , type:'bars'}} />
 
     <div className="text-xl font-semibold mb-5">Submit Your Application</div>
-      <div className="flex flex-col gap-5">
-        <div className="flex gap-10 [&>*]:w-1/2 ">
+      <div className="flex flex-col gap-5 ">
+        <div className="flex gap-10 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap md-mx:gap-5">
           <TextInput {...form.getInputProps("name")}
            readOnly={Preview} variant={Preview?"unstyled" : "default"} className={`${Preview?"text-mine-shaft-300 font-semibold":""}`} label="Full name" placeholder = "Enter name" withAsterisk  />
           <TextInput {...form.getInputProps("email")} 
           label="Email" placeholder = "Enter email" withAsterisk />
         </div>
-        <div className="flex gap-10 [&>*]:w-1/2 ">
+        <div className="flex gap-10 [&>*]:w-1/2 sm-mx:[&>*]:!w-full sm-mx:flex-wrap md-mx:gap-5 ">
           <NumberInput {...form.getInputProps("phone")}
            readOnly={Preview} variant={Preview?"unstyled" : "default"} className={`${Preview?"text-mine-shaft-300 font-semibold":""}`}  label="Phone number" placeholder = "Enter phone number" withAsterisk hideControls min={0} max={9999999999} clampBehavior="strict" />
           <TextInput {...form.getInputProps("website")}

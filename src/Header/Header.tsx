@@ -51,7 +51,7 @@ const Header = () => {
       <div className="flex gap-1 items-center  text-bright-sun-400" >
 
       <IconAnchor stroke={2.5}  className=" h-8 w-8"/>
-      <div className="text-3xl font-semibold xs-mx:hidden">JobHook</div>
+      <div className="text-3xl font-semibold xs-mx:hidden">EliteHire</div>
         
       </div>
 
