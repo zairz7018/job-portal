@@ -75,29 +75,36 @@ const SignUp = () => {
 
 
   return <>
-    <LoadingOverlay  visible={loading} zIndex={1000} overlayProps={{radius:'sm' , blur:2}} 
-      loaderProps={{color:"brightSun.4" , type:"bars"}} className="translate-x-1/2"
+    <LoadingOverlay  
+    visible={loading} 
+    zIndex={1000} 
+    overlayProps={{radius:'sm' , blur:2}} 
+    loaderProps={{color:"brightSun.4" , type:"bars"}} 
+    className="translate-x-1/2"
       />
-   <div className="w-1/2 px-20 flex flex-col justify-center  gap-3">
+   <div className="w-1/2 sm-mx:py-20 sm-mx:w-full px-20 bs-mx:px-10 md-mx:px-5 flex flex-col gap-3 justify-center ">
     <div className="text-2xl font-semibold "> Create Account</div>
     <TextInput value={data.name} error={formError.name} name="name" onChange={handleChange} withAsterisk label="Full Name" placeholder="Your Name"/>
     <TextInput error={formError.email} value={data.email} name="email" onChange={handleChange} withAsterisk leftSection={<IconAt style={{width: rem(18) , height: rem(16)}} />} label="Email " placeholder="Your email" />
     <PasswordInput error={formError.password} value={data.password} name="password" onChange={handleChange} withAsterisk leftSection={<IconLock style={{width: rem(18) , height: rem(18)}} stroke={1.5} />} label="Password"  placeholder="Password" />
     <PasswordInput error={formError.confirmPassword} value={data.confirmPassword} name="confirmPassword" onChange={handleChange} withAsterisk leftSection={<IconLock style={{width: rem(18) , height: rem(18)}} stroke={1.5} />} label="Confirm Password"  placeholder="Confirm Password" />
+    
     <Radio.Group
       value={data.accountType}
       onChange={handleChange}
       label="you Are?"
       withAsterisk
     >
-      <Group mt="xs">
-      <Radio className="py-4 px-6 border border-mine-shaft-800 hover:bg-mine-shaft-900 has-[:checked]:border-bright-sun-400 has-[:checked]:bg-bright-sun-400/10 rounded-lg" autoContrast value="APPLICANT" label="APPLICANT" />
-      <Radio className="py-4 px-6 border border-mine-shaft-800 hover:bg-mine-shaft-900 has-[:checked]:border-bright-sun-400 has-[:checked]:bg-bright-sun-400/10 rounded-lg" autoContrast value="EMPLOYER" label="EMPLOYER" />
-      </Group>
+      <div className="flex gap-6 xs-mx:gap-3" >
+      <Radio className="py-4 px-6 border border-mine-shaft-800 sm-mx:px-4 sm-mx:py-2 hover:bg-mine-shaft-900 has-[:checked]:border-bright-sun-400 has-[:checked]:bg-bright-sun-400/10 rounded-lg" autoContrast value="APPLICANT" label="APPLICANT" />
+
+      <Radio className="py-4 px-6 border border-mine-shaft-800 sm-mx:px-4 sm-mx:py-2 hover:bg-mine-shaft-900 has-[:checked]:border-bright-sun-400 has-[:checked]:bg-bright-sun-400/10 rounded-lg" autoContrast value="EMPLOYER" label="EMPLOYER" />
+      
+      </div>
     </Radio.Group>
     <Checkbox  autoContrast label={<>I accept{' '}<Anchor>tesms & conditions</Anchor> </>} />
     <Button loading={loading} onClick={handleSubmit} autoContrast variant="filled">Sign Up</Button>
-    <div className="mx-auto">Have a Account ? <span onClick={()=>{navigate("/login"); setData(form);setFormError(data)}} className="text-bright-sun-400 hover:underline cursor-pointer" >login</span></div>
+    <div className="mx-auto sm-mx:text-sm xs-mx:text-xs ">Have a Account ? <span onClick={()=>{navigate("/login"); setData(form);setFormError(data)}} className="text-bright-sun-400 hover:underline cursor-pointer sm-mx:text-sm xs-mx:text-xs" >login</span></div>
 
     
   </div>

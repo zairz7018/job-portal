@@ -34,12 +34,25 @@ const Header = () => {
       setupResponseInterceptor(navigate);
     },[navigate])
     useEffect(() => {
-      if(token && token.split('.').length === 3){
-        const decoded = jwtDecode(localStorage.getItem("token")||"");
-        dispatch(setUser({...decoded , email:decoded.sub}));
+  if (token !== "") {
+    const rawToken = localStorage.getItem("token");
+
+    // ✅ Correction logique de ta condition : le token doit exister et ne pas être vide
+    if (rawToken && rawToken !== "") {
+      console.log("Token brut récupéré du localStorage :", rawToken); // 🔍 debug
+
+      // ✅ Vérifie que le token a bien 3 parties
+      if (rawToken.split('.').length === 3) {
+        const decoded = jwtDecode(rawToken);
+        dispatch(setUser({ ...decoded, email: decoded.sub }));
+      } else {
+        console.warn("Token invalide ou mal formé, non décodé.");
       }
-        getProfile(user?.profileId)
-          .then((res) => {
+    } else {
+      console.warn("Aucun token trouvé dans localStorage.");
+    }
+  }
+      if(user?.profileId) getProfile(user?.profileId).then((res) => {
             dispatch(setProfile(res));
           })
           .catch((error) => {

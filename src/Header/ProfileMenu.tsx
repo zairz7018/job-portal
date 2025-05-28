@@ -21,6 +21,7 @@ const ProfileMenu = () => {
   const [opened, setOpened] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleLogout = ()=>{
+    
     dispatch(removeUser());
   }
   return (

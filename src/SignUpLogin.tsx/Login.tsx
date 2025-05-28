@@ -62,18 +62,20 @@ const Login = () => {
 
 
   return <>
-  <LoadingOverlay  visible={loading} zIndex={1000} overlayProps={{radius:'sm' , blur:2}} 
+  <LoadingOverlay  visible={loading} 
+  zIndex={1000} 
+  overlayProps={{radius:'sm' , blur:2}} 
   loaderProps={{color:"brightSun.4" , type:"bars"}}
   />
-  <div className="w-1/2 px-20 flex flex-col justify-center  gap-3">
-  <div className="text-2xl font-semibold "> Create Account</div>
+  <div className="w-1/2 sm-mx:w-full px-20 flex flex-col justify-center  gap-3  bs-mx:px-10 sm-mx:px-5">
+  <div className="text-2xl font-semibold "> Login</div>
   
   <TextInput error={formError.email} value={data.email} name="email" onChange={handleChange} withAsterisk leftSection={<IconAt style={{width: rem(18) , height: rem(16)}} />} label="Email " placeholder="Your email" />
   <PasswordInput error={formError.password} value={data.password} name="password" onChange={handleChange} withAsterisk leftSection={<IconLock style={{width: rem(18) , height: rem(18)}} stroke={1.5} />} label="Password"  placeholder="Password" />
   
   <Checkbox autoContrast label={<>I accept{' '}<Anchor>tesms & conditions</Anchor> </>} />
   <Button loading={loading} onClick={handleSubmit} autoContrast variant="filled">Login</Button>
-  <div className="mx-auto">Don't Have a Account ? <span onClick={()=>{navigate("/signup"); setData(form);setFormError(data)}} className="cursor-pointer text-bright-sun-400 hover:underline" >SignUp</span></div>
+  <div className="mx-auto sm-mx:text-sm xs-mx:text-xs">Don't Have a Account ? <span onClick={()=>{navigate("/signup"); setData(form);setFormError(data)}} className="cursor-pointer text-bright-sun-400 hover:underline" >SignUp</span></div>
   <div onClick={open} className="text-bright-sun-400 hover:underline cursor-pointer text-center">Forget Password ?</div>
 
   
